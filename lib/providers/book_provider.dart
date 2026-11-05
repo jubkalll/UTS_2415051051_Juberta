@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/book_model.dart';
+import '../models/saved_book_model.dart';
 import '../repositories/book_repository.dart';
 import '../repositories/book_supabase_repository.dart';
 
@@ -20,7 +21,7 @@ class BookProvider with ChangeNotifier {
   String get errorMessage => _errorMessage;
   String get currentQuery => _currentQuery;
 
-  // Mengambil buku dari Open Library API
+  // READ (API): Mengambil data buku dari Open Library API
   Future<void> fetchBooks([String query = 'flutter']) async {
     _isLoading = true;
     _errorMessage = '';
@@ -37,24 +38,23 @@ class BookProvider with ChangeNotifier {
     }
   }
 
-  // --- Saved Books (Supabase) State ---
-  List<Map<String, dynamic>> _savedBooks = [];
+  // --- Saved Books (Supabase Database CRUD State) ---
+  List<SavedBook> _savedBooks = [];
   bool _isSavedLoading = false;
   String _savedErrorMessage = '';
 
-  List<Map<String, dynamic>> get savedBooks => _savedBooks;
+  List<SavedBook> get savedBooks => _savedBooks;
   bool get isSavedLoading => _isSavedLoading;
   String get savedErrorMessage => _savedErrorMessage;
 
-  // Mengambil buku dan catatan yang disimpan di Supabase
+  // READ (Database): Mengambil catatan buku dari Supabase
   Future<void> fetchSavedBooks() async {
     _isSavedLoading = true;
     _savedErrorMessage = '';
     notifyListeners();
 
     try {
-      final data = await _supabaseRepository.getSavedBooks();
-      _savedBooks = List<Map<String, dynamic>>.from(data);
+      _savedBooks = await _supabaseRepository.getSavedBooks();
     } catch (e) {
       _savedErrorMessage = e.toString().replaceFirst('Exception: ', '');
       debugPrint("Error fetching saved books: $e");
@@ -64,7 +64,7 @@ class BookProvider with ChangeNotifier {
     }
   }
 
-  // Menyimpan buku & catatan ke Supabase
+  // CREATE (Database): Menambahkan catatan buku baru ke Supabase
   Future<void> saveBook({
     required String bookId,
     required String bookTitle,
@@ -80,7 +80,21 @@ class BookProvider with ChangeNotifier {
     await fetchSavedBooks();
   }
 
-  // Menghapus buku & catatan dari Supabase
+  // UPDATE (Database): Mengedit catatan & rating pada Supabase
+  Future<void> updateBook({
+    required int id,
+    required String note,
+    required double rating,
+  }) async {
+    await _supabaseRepository.updateBook(
+      id: id,
+      note: note,
+      rating: rating,
+    );
+    await fetchSavedBooks();
+  }
+
+  // DELETE (Database): Menghapus catatan dari Supabase
   Future<void> removeBook(dynamic id) async {
     final intId = id is int ? id : int.tryParse(id.toString()) ?? 0;
     await _supabaseRepository.deleteBook(intId);
