@@ -9,7 +9,6 @@ import 'package:uts_2415051051_juberta/screens/main_navigation.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Inisialisasi Supabase (Ganti dengan URL dan Anon Key dari project Supabase Anda)
   await Supabase.initialize(
     url: 'https://dkelpevifphgljjppncg.supabase.co',
     publishableKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrZWxwZXZpZmpwaGdsampwbmNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM4NDI3ODEsImV4cCI6MjEwOTQxODc4MX0.iBWIMIyLRoDzo6Ivudf8hOYOE_jdwT6IydB5edw6ebA',
