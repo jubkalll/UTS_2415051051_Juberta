@@ -115,7 +115,7 @@ lib/
    - Pastikan Flutter SDK sudah terpasang (`flutter doctor`).
    - Clone repository ini:
      ```bash
-     git clone https://github.com/username/uts_2415051051_juberta.git
+     git clone https://github.com/jubkalll/uts_2415051051_juberta.git
      cd uts_2415051051_juberta
      ```
 
