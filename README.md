@@ -98,14 +98,37 @@ lib/
 ---
 
 ## 📱 Screenshot Aplikasi
-*(Tempatkan tangkapan layar aplikasi di sini sebelum pengumpulan)*
+
 * **Home / Catalog (Mobile & Tablet Responsive Grid)**
+<p align="center">
+  <img src="screenshots/home.png" width="30%" />
+</p>
 * **Detail Buku**
+<p align="center">
+  <img src="screenshots/detail_buku.png" width="30%" />
+</p>
 * **Form Tambah Catatan & Rating**
+<p align="center">
+  <img src="screenshots/tambah_catatan.png" width="30%" />
+</p>
 * **Form Edit Catatan**
+<p align="center">
+  <img src="screenshots/edit_catatan.png" width="30%" />
+</p>
 * **Daftar Catatan Favorit (Supabase)**
+<p align="center">
+  <img src="screenshots/daftar_favorites.png" width="30%" />
+</p>
 * **Dialog Konfirmasi Hapus & SnackBar Feedback**
+<p align="center">
+  <img src="screenshots/dialog_konfirmasi.png" width="30%" />
+  <img src="screenshots/snackbar.png" width="30%" />
+</p>
 * **Profil Pengembang**
+<p align="center">
+  <img src="screenshots/profil_pengembang.png" width="30%" />
+</p>
+
 
 ---
 
@@ -133,4 +156,4 @@ lib/
    ```bash
    flutter build apk --release
    ```
-   File APK output akan berada di: `build/app/outputs/flutter-apk/app-release.apk` (dapat diubah nama menjadi `UTS_2415051051_Juberta.apk`).
+   File APK output akan berada di: `UTS_2415051051_Juberta.apk`.

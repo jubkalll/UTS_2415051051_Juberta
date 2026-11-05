@@ -16,10 +16,9 @@ class ProfileScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
             const CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.blue,
-              child: Icon(Icons.person, size: 50, color: Colors.white),
-            ),
+            radius: 50,
+            backgroundImage: AssetImage('screenshots/foto.png'),
+          ),
             const SizedBox(height: 16),
             const Text(
               'Juberta Kalvarisman Waruwu',
