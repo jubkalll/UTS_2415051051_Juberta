@@ -5,7 +5,7 @@ class BookRepository {
   final ApiService apiService;
   BookRepository(this.apiService);
 
-  Future<List<Book>> getBooks() async {
-    return await apiService.fetchBooks();
+  Future<List<Book>> getBooks([String query = 'flutter']) async {
+    return await apiService.fetchBooks(query);
   }
 }
