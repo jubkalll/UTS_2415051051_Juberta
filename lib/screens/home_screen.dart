@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uts_2415051051_juberta/providers/book_provider.dart';
 import 'package:uts_2415051051_juberta/widgets/book_card.dart';
+import 'package:uts_2415051051_juberta/widgets/custom_search_bar.dart';
 import 'package:uts_2415051051_juberta/screens/book_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -43,41 +44,18 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          // Search Bar
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-            child: TextField(
-              controller: _searchController,
-              textInputAction: TextInputAction.search,
-              decoration: InputDecoration(
-                hintText: 'Cari buku (contoh: flutter, python)...',
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: _searchController.text.isNotEmpty
-                    ? IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          _searchController.clear();
-                          setState(() {});
-                          Provider.of<BookProvider>(context, listen: false).fetchBooks('flutter');
-                        },
-                      )
-                    : IconButton(
-                        icon: const Icon(Icons.arrow_forward),
-                        onPressed: _onSearch,
-                      ),
-                filled: true,
-                fillColor: Colors.grey.shade100,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.grey.shade300),
-                ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              ),
-              onChanged: (_) {
-                setState(() {});
-              },
-              onSubmitted: (_) => _onSearch(),
-            ),
+          // Reusable Custom Search Bar
+          CustomSearchBar(
+            controller: _searchController,
+            onSearch: _onSearch,
+            onClear: () {
+              _searchController.clear();
+              setState(() {});
+              Provider.of<BookProvider>(context, listen: false).fetchBooks('flutter');
+            },
+            onChanged: (_) {
+              setState(() {});
+            },
           ),
           // Book Grid / Content
           Expanded(
@@ -154,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
 
-                // 4. Data State & Responsive Grid Layout
+                // 4. Data State & Responsive Grid Layout (Compact: 2, Wide/Tablet: 4)
                 return RefreshIndicator(
                   onRefresh: () => provider.fetchBooks(provider.currentQuery),
                   child: LayoutBuilder(
